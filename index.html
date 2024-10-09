@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <button class="btn">getload</button>
+  <div class="text"></div>
+    <script>
+
+        document.querySelector(".btn").addEventListener('click',loadtext);
+        function loadtext()
+        {
+            //Create XHR object
+            var xhr = new XMLHttpRequest();
+            //OPEN - type,url/file,async
+            xhr.open('GET','sample.txt',true);
+            xhr.onload = function()
+            {
+                if(this.status == 200)
+            {
+                document.querySelector(".text").innerHTML = this.responseText;
+            }
+            else if(this.status == 404)
+            {
+                document.querySelector(".text").innerHTML = 'Not Found Like Tht';
+            }
+            } 
+
+            xhr.onerror = function()
+            {
+                document.querySelector(".text").innerHTML = "Not Found Like Tht";
+                console.log('Request Error');
+            }
+
+            // xhr.onreadystatechange = function()
+            // {
+            //     if(this.readyState == 4 && this.status == 200)
+            // {
+            //     console.log(this.responseText);
+            // }
+
+            // }
+//  Optional used for loaders
+    //  xhr.onprogress
+
+
+            //send request
+            xhr.send(); 
+        }
+    </script>
+ </body>
+ </html>

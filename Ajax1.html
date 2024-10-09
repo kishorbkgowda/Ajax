@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="lol">Onload</button>
+    <button class="lol1">get users</button>
+    <div>
+    </div>
+    <script>
+       document.querySelector(".lol").addEventListener("click",onload);
+       document.querySelector(".lol1").addEventListener("click",onload1);
+       var xhr = new XMLHttpRequest();
+       function onload()
+       { 
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET","lol.json",true);
+        xhr.onload = function()
+        {
+            if(this.status == 200)
+        {
+            var c = JSON.parse(this.responseText);
+            document.querySelector('div').innerHTML = c.name;
+        }
+        }
+        xhr.send();
+
+       }
+        
+       function onload1()
+       {
+           xhr.open("GET","lols.json",true);
+           xhr.onload = function()
+           {
+             if(xhr.status == 200)
+             {
+                var c = JSON.parse(this.responseText);
+                document.querySelector('div').innerHTML = c.map((data)=>
+            {
+                return `<h1>${data.name}</h1></br>
+                <h1>${data.age}</h1></br>
+                `
+
+            })
+             }
+           }
+           xhr.send();
+       }
+   
+
+    </script>
+</body>
+</html>
